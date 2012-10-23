@@ -75,12 +75,15 @@ setup_items.each do |setup|
   
   setup["users"].each do |user|
     
+    user_flags = begin
+      is_superuser      = user['superuser']         ? "-s" : "-S"
+      can_create_db     = user['can_create_db']     ? "-d" : "-D"
+      can_create_roles  = user['can_create_roles']  ? "-r" : "-R"
+      [is_superuser, can_create_db, can_create_roles].join(' ')
+    end
+    
     create_user_command = begin
-      if user['superuser']
-        "sudo -u postgres createuser -s #{user['username']};"
-      else
-        "sudo -u postgres createuser #{user['username']};"
-      end
+      "sudo -u postgres createuser #{user_flags} #{user['username']};"
     end
 
     set_user_password = begin
