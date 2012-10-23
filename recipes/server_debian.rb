@@ -19,6 +19,8 @@
 # limitations under the License.
 #
 
+ENV["LC_ALL"] = "en_US.utf8"
+
 include_recipe "postgresql::client"
 
 if node[:postgresql][:version] == "8.3"
