@@ -34,6 +34,8 @@ when "8.4"
   node.default[:postgresql][:ssl] = "true"
 when "9.1"
   node.default[:postgresql][:ssl] = "true"
+when "9.2"
+  node.default[:postgresql][:ssl] = "true"
 end
 
 # Include the right "family" recipe for installing the server

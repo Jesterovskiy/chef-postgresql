@@ -21,11 +21,10 @@
 
 include_recipe "postgresql::client"
 
-case node[:postgresql][:version]
-when "8.3"
-  node.default[:postgresql][:ssl] = "off"
-else # > 8.3
-  node.default[:postgresql][:ssl] = "true"
+if node[:postgresql][:version] == "8.3"
+  node.default[:postgresql][:ssl] = false
+else
+  node.default[:postgresql][:ssl] = true
 end
 
 node['postgresql']['server']['packages'].each do |pg_pack|
