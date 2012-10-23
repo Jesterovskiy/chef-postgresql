@@ -24,8 +24,6 @@
 # NOTE: This requires the "apt" recipe
 case node["platform"]
 when "ubuntu"
-  include_recipe "apt"
-  
   apt_repository "postgresql" do
     uri "http://ppa.launchpad.net/pitti/postgresql/ubuntu"
     distribution node['lsb']['codename']
@@ -33,6 +31,5 @@ when "ubuntu"
     keyserver "keyserver.ubuntu.com"
     key "8683D8A2"
     action :add
-    notifies :run, resources(:execute => "apt-get update"), :immediately
   end
 end
