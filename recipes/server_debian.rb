@@ -43,7 +43,7 @@ package "postgresql" do
   end
 end
 
-if node.default[:postgresql][:ssl] == 'true' &&
+if node[:postgresql][:ssl] == 'true' &&
   node[:postgresql].has_key?(:ssl_password)
 
   data_dir = node[:postgresql][:data_dir]
