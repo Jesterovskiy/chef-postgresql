@@ -24,7 +24,12 @@
 # NOTE: This requires the "apt" recipe
 case node["platform"]
 when "ubuntu"
-  apt_repository "postgresql" do
+  file "remove deprecated Pitti PPA apt repository" do
+    action :delete
+    path "/etc/apt/sources.list.d/postgresql-source"
+  end
+
+  apt_repository "apt.postgresql.org" do
     uri 'http://apt.postgresql.org/pub/repos/apt'
     distribution node['lsb']['codename']
     components ["main", node['postgresql']['version']]
